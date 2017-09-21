@@ -108,7 +108,18 @@ def plantuml(key, value, format, _):
                 with open(src, "w") as f:
                     f.write(txt)
 
-                call(["java", "-jar", "plantuml.jar", "-t"+filetype, src])
+                # allow env variables to override plantuml command-line
+                args = [("-S" + x) for x in os.environ.get("PLANTUML_SKINPARAMS", "").split(':') if len(x)]
+                args += [("-I" + x) for x in os.environ.get("PLANTUML_INCLUDES", "").split(':') if len(x)]
+
+                retval = call(["java", "-jar", os.environ.get("PLANTUML_PATH", "plantuml.jar")] + args + [ "-t"+filetype, src])
+                if retval != 0:
+                    try:
+                        os.unlink(dest)
+                    except:
+                        pass
+                    finally:
+                        sys.exit(retval)
                 sys.stderr.write('Created image ' + dest + '\n')
 
             return Para([Image(#[ident, [], keyvals],
