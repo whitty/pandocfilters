@@ -1,0 +1,27 @@
+Source: pandocfilters
+Section: python
+Priority: optional
+Maintainer: Greg Whiteley <greg.whiteley@gmail.com>
+Build-Depends: debhelper (>= 5)
+Build-Depends-Indep: python (>= 2.6.6-2~), python3 (>= 3.1.2-10~)
+XS-Python-Version: all
+Standards-Version: 3.9.4
+Homepage: https://github.com/jgm/pandocfilters
+
+Package: python-pandocfilters
+Architecture: all
+Depends: ${python:Depends}, ${misc:Depends}, pandoc (>= 1.12), pandoc (< 1.16)
+XB-Python-Version: ${python:Versions}
+Description: pandocfilters - A python module for implementing pandoc
+ filters in the python language. Pandoc filters are pipes that read a
+ JSON serialization of the Pandoc AST from stdin, transform it in some
+ way, and write it to stdout.
+
+Package: python3-pandocfilters
+Architecture: all
+Depends: ${python:Depends}, ${misc:Depends}, pandoc (>= 1.12), pandoc (< 1.16)
+XB-Python-Version: ${python3:Versions}
+Description: pandocfilters - A python module for implementing pandoc
+ filters in the python language. Pandoc filters are pipes that read a
+ JSON serialization of the Pandoc AST from stdin, transform it in some
+ way, and write it to stdout.
